@@ -6,12 +6,19 @@ public class Coffee extends Ingredient {
     public Coffee() {
         this.amount = 8;
     }
-
+    // Update Coffee constructor
     public Coffee(int amount, boolean decaf) {
+        this.name = "Coffee";
+        this.amount = 8;
+        this.unit = Unit.GR;
+        this.decaf = false;
+    }
+    // Overloaded Coffee constructor
+    public Coffee(int amount) {
         this.name = "Coffee";
         this.amount = amount;
         this.unit = Unit.GR;
-        this.decaf = decaf;
+        this.decaf = false;
     }
 
     @Override
