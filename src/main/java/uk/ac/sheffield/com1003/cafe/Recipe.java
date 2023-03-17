@@ -9,12 +9,12 @@ public class Recipe {
     public enum Size { SMALL, REGULAR, LARGE };
     private String name;
     private double price;
-    private Size size;
+    private uk.ac.sheffield.com1003.cafe.Recipe.Size size;
     private Ingredient[] ingredients;
 
     public Recipe(String name, double price) {
         this(name, price, Size.REGULAR, 3);
-        
+
     }
 
     public Recipe(String name, double price, Size size, int numberOfIngredients) {
@@ -64,4 +64,5 @@ public class Recipe {
         }
         return true;
     }
+
 }
