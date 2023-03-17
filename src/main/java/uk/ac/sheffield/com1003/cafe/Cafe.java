@@ -88,6 +88,12 @@ public class Cafe {
     public void removeRecipe(String recipeName) throws RecipeNotFoundException {
         boolean found = false;
         for (int i = 0; i < nRecipes; i++) {
+            /** If the given name was found, removes that recipe from the menu by replacing it with the last
+             * recipe in the menu, setting the last recipe to null.Then decrementing the nRecipes.
+             *
+             *
+             */
+
             if (menu[i].getName().equals(recipeName)) {
                 found = true;
                 menu[i] = menu[nRecipes - 1];
@@ -96,7 +102,7 @@ public class Cafe {
                 break;
             }
         }
-// Display message in case
+// Thrown the exception if the recipe is not found
         if (!found) {
             throw new RecipeNotFoundException("Recipe not found: " + recipeName);
         }
@@ -138,6 +144,7 @@ public class Cafe {
     // Implement printPendingOrders
     public void printPendingOrders() {
         System.out.println("Pending Orders:");
+       // iterates over the orders array between the indexes indexNextOrderToServe and indexNextOrderToPlace
         for (int i = indexNextOrderToServe; i < indexNextOrderToPlace; i++) {
             if (orders[i] != null) {
                 System.out.println(orders[i].toString());
@@ -162,7 +169,7 @@ public class Cafe {
         System.out.println(greeting());
         System.out.println("Menu");
         System.out.println("==========");
-        for (Recipe recipe : menu) {
+        for (Recipe recipe : menu) { // run for loop to print every Recipe instances
             if (recipe != null) {
                 System.out.println(recipe.getName() + " - " + recipe.getPrice());
             }
@@ -186,10 +193,11 @@ public class Cafe {
     //Implementation of placeOder method
     public boolean placeOrder(String recipeName, String customerName, double amountPaid)
             throws RecipeNotFoundException, CafeOutOfCapacityException {
-        if (indexNextOrderToPlace >= orders.length) {
+        if (indexNextOrderToPlace >= orders.length) {//check if the cafe is at capacity.
             throw new CafeOutOfCapacityException();
         }
         Recipe recipe = null;
+        //search for the requested recipe in the menu
         for (Recipe r : menu) {
             if (r != null && r.getName().equals(recipeName)) {
                 recipe = r;
@@ -198,10 +206,11 @@ public class Cafe {
         }
 
         if (recipe == null) {
+            // Display a message if request was not found
             throw new RecipeNotFoundException("Recipe not found: " + recipeName);
         }
 
-        if (amountPaid < recipe.getPrice()) {
+        if (amountPaid < recipe.getPrice()) { //Do not process order if the customer doesn't pay enough money.
             return false;
         }
 
@@ -237,7 +246,7 @@ public class Cafe {
         if (indexNextOrderToServe >= indexNextOrderToPlace) {
             return null;
         }
-
+        //For requested recipe, create a new Order and place it in the orders array at indexNextOrderToPlace
         Order servedOrder = orders[indexNextOrderToServe];
         servedOrder.serve();
         orders[indexNextOrderToServe] = null;

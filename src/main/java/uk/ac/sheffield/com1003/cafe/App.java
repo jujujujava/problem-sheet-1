@@ -16,19 +16,23 @@ public class App {
             Recipe espresso = new Recipe("Espresso", 1.5, Recipe.Size.SMALL, 2);
             espresso.addIngredient(new Coffee());
             espresso.addIngredient(new Water());
-            myCafe.addRecipe(espresso);
+
 
             // Create a Recipe instance to make Double Espresso
             Recipe doubleEspresso = new Recipe("Double Espresso", 2.2, Recipe.Size.REGULAR, 2);
             doubleEspresso.addIngredient(new Coffee(15));
             doubleEspresso.addIngredient(new Water(50));
-            myCafe.addRecipe(doubleEspresso);
+
 
             // Create a Recipe instance to make Large Soy Latte
             Recipe largeSoyLatte = new Recipe("Large Soy Latte", 2.5, Recipe.Size.LARGE, 3);
             largeSoyLatte.addIngredient(new Coffee(15));
             largeSoyLatte.addIngredient(new Milk(300, Milk.Type.SOY));
             largeSoyLatte.addIngredient(new Water(100));
+
+            //Add these Recipe instances to the Cafe object using the addRecipe() method.
+            myCafe.addRecipe(espresso);
+            myCafe.addRecipe(doubleEspresso);
             myCafe.addRecipe(largeSoyLatte);
 
         } catch (TooManyIngredientsException e) {
